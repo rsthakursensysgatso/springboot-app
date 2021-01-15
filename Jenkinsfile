@@ -46,12 +46,12 @@ pipeline {
       } 
     }
 
-    stage('Anchore analyse') {
+/*    stage('Anchore analyse') {
       steps {
         writeFile file: 'anchore_images', text: 'docker.io/rsthakur83/spring-boot-demo'
         anchore name: 'anchore_images'
       }
-    }
+*/    }
 
     stage('Deploy to K8s') {
       steps {
