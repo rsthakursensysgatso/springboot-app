@@ -55,7 +55,8 @@ pipeline {
 
     stage('Deploy to K8s') {
       steps {
-        withKubeConfig([credentialsId: 'kubernetes-config']) 
+//        withKubeConfig([credentialsId: 'kubernetes-config']) 
+kubeconfig(caCertificate: 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJWekNCL3FBREFnRUNBZ0VBTUFvR0NDcUdTTTQ5QkFNQ01DTXhJVEFmQmdOVkJBTU1HR3N6Y3kxelpYSjIKWlhJdFkyRkFNVFU1TVRBNU9ERTNNREFlRncweU1EQTJNREl4TVRReU5UQmFGdzB6TURBMU16RXhNVFF5TlRCYQpNQ014SVRBZkJnTlZCQU1NR0dzemN5MXpaWEoyWlhJdFkyRkFNVFU1TVRBNU9ERTNNREJaTUJNR0J5cUdTTTQ5CkFnRUdDQ3FHU000OUF3RUhBMElBQk9YVHVHaUZHaE1sS05CbmNLbXh5RGxnMWhiT2NtT3kvMENQWmFHTWo0b1QKRE4vYkV4TmN1cjFRVnI2cS9GbUVGbloxcUt1ajg2YUY4eU5kdHpWdzFwMmpJekFoTUE0R0ExVWREd0VCL3dRRQpBd0lDcERBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUFvR0NDcUdTTTQ5QkFNQ0EwZ0FNRVVDSUR4Q3M1NGdkc1NlCjJyYWtnYmlJNkVBV2RpNEZYcmsxdUpLbS84WnZIRFFMQWlFQTFjTEx5Z1FETWhkbkY0Z3hMWmcxemdjTjFyTTYKVXlYdzhCcEtvRVlhd0N3PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==', serverUrl: 'https://127.0.0.1:6443')
 {
           sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'
           sh 'chmod u+x ./kubectl'
