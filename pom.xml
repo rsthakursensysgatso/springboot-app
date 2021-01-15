@@ -63,7 +63,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <failBuildOnCVSS>7</failBuildOnCVSS>
+				<!--                    <failBuildOnCVSS>7</failBuildOnCVSS> -->
                     <!-- Generate all report formats -->
                     <format>ALL</format>
                     <!-- Don't use Nexus Analyzer -->
