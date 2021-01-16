@@ -18,7 +18,7 @@ spec:
         app: spring-boot-demo
     spec:
       containers:
-      - image: docker.io/maartensmeets/spring-boot-demo
+      - image: docker.io/rsthakur83/spring-boot-demo
         name: spring-boot-demo
         resources: {}
 status: {}
