@@ -46,10 +46,33 @@ pipeline {
       } 
     }
 
+	stage('Scan Image') {
+		
+	steps {
+	    aquaMicroscanner imageName: "rsthakur83/spring-boot-demo", notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html'
+	    }
+	}	
+
     stage('Deploy to K8s') {
       steps {
           sh 'kubectl apply -f k8s.yaml'
       } 
     }
   }
+}
+
+  post {
+    success {
+		sh "echo Deployment SUCCESSFUL"
+               emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n ----------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                    to: "rsthakur83@gmail.com", 
+                    subject: 'Deployment Build SUCCESSFUL : $PROJECT_NAME - #$BUILD_NUMBER'	    
+   }
+
+    failure {
+	    sh "echo Deployment FAILED"
+               emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n ----------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                    to: "rsthakur83@gmail.com", 
+                    subject: 'Deployment Build FAILED : $PROJECT_NAME - #$BUILD_NUMBER'	    
+    }
 }
