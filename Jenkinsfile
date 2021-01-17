@@ -60,7 +60,6 @@ pipeline {
       } 
     }
   }
-}
 
   post {
     success {
@@ -76,4 +75,6 @@ pipeline {
                     to: "rsthakur83@gmail.com", 
                     subject: 'Deployment Build FAILED : $PROJECT_NAME - #$BUILD_NUMBER'	    
     }
+}
+
 }
