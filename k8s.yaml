@@ -52,7 +52,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /spring-boot-demo
+      - path: /
         backend:
           serviceName: spring-boot-demo
           servicePort: 8080
