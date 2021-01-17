@@ -19,7 +19,6 @@ pipeline {
       steps {
         withMaven(maven : 'mvn-3.6.3') {
           sh 'mvn dependency-check:check'
-//           sh 'mvn org.owasp:dependency-check-maven:1.1.1:check -DfailBuildOnCVSS=7'
         }
 
         dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
@@ -47,11 +46,13 @@ pipeline {
     }
 
 	stage('Scan Image') {
+
+      steps {
+        writeFile file: 'anchore_images', text: 'docker.io/rsthakur83/spring-boot-demo'
+        anchore name: 'anchore_images'
+      }
+    }
 		
-	steps {
-	    aquaMicroscanner imageName: "rsthakur83/spring-boot-demo", notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html'
-	    }
-	}	
 
     stage('Deploy to K8s') {
       steps {
